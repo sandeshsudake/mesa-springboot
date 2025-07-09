@@ -427,6 +427,32 @@ h2::after {
 	transition: all 0.3s ease-in-out;
 }
 
+
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background-color: var(--dark-bg);
+    gap: 15px;
+    padding: 20px 0;
+    display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+
 /* --- Hero Section --- */
 .hero-section {
     color: white;
