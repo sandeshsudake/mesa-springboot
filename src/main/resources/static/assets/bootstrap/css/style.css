@@ -1,0 +1,1305 @@
+/* General Styling */
+:root {
+    --primary-color: #007bff; /* A vibrant blue */
+    --secondary-color: #28a745; /* A strong green */
+    --accent-color: #ffc107; /* A bright yellow for highlights */
+    --dark-bg: #212529; /* Dark charcoal */
+    --light-bg: #f8f9fa; /* Very light grey */
+    --text-dark: #343a40; /* Dark grey for main text */
+    --text-light: #fefefe; /* Near white for light backgrounds */
+    --border-color: #dee2e6; /* Light border */
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-heavy: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--light-bg);
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 80px 0;
+    position: relative;
+}
+
+.bg-light {
+    background-color: var(--light-bg);
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 40px;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.2);
+}
+
+.btn-small {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--dark-bg);
+    padding: 15px 30px;
+    box-shadow: var(--shadow-heavy);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.brand-logo {
+    color: var(--text-light);
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-logo .fas {
+    color: var(--accent-color);
+    font-size: 2.2rem;
+    transition: transform 0.5s ease-in-out;
+}
+
+.animated-icon:hover {
+    transform: rotate(360deg) scale(1.1);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links li a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.0rem;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    left: 0;
+    bottom: 0;
+    transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+.nav-links li a:hover {
+    color: var(--primary-color);
+}
+
+.nav-button {
+    background-color: var(--secondary-color);
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+.nav-button:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4);
+}
+
+.nav-button::after {
+    display: none; /* Remove underline for button */
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-light);
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+/* style.css */
+
+/* --- Hero Section --- */
+.hero-section {
+    color: white;
+    text-align: center;
+    padding: 120px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 750px; /* Slightly increased height for larger components */
+    position: relative;
+    overflow: hidden; /* Important for containing animations */
+    background-color: #0a0e14; /* A deep, dark background */
+}
+
+/* Ensure any previous ::before background image or content is removed */
+.hero-section::before {
+    content: none !important;
+}
+
+/* Mechanical Blueprint Background Container */
+.mechanical-blueprint-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Behind overlay and content */
+    perspective: 1200px; /* Stronger perspective for 3D illusion */
+    transform-style: preserve-3d;
+}
+
+/* SVG Blueprint Grid */
+.blueprint-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15; /* Very subtle */
+    animation: gridPan 90s linear infinite; /* Slow, continuous pan */
+}
+
+/* Individual Mechanical Objects Container (SVG wrappers) */
+.mech-object {
+    position: absolute;
+    width: 250px; /* Base size, overridden by specific classes */
+    height: 250px; /* Base size */
+    opacity: 0.4;
+    filter: drop-shadow(0 0 8px rgba(0, 123, 255, 0.5)); /* Subtle glow for all */
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate; /* For subtle back-and-forth movement */
+}
+.mech-object svg {
+    width: 100%;
+    height: 100%;
+    display: block; /* Remove extra space below SVG */
+}
+
+/* Specific Component Styling and Animation */
+.mech-object.gear-large {
+    width: 400px; height: 400px;
+    top: 10%; left: -5%; /* Partially off-screen */
+    opacity: 0.25;
+    transform: rotateX(20deg) rotateY(-30deg); /* Initial 3D tilt */
+    animation: rotateGearClockwise 40s linear infinite, floatAndScale 20s ease-in-out infinite alternate;
+}
+.mech-object.gear-small {
+    width: 200px; height: 200px;
+    bottom: 5%; right: 10%;
+    opacity: 0.3;
+    transform: rotateX(10deg) rotateY(20deg);
+    animation: rotateGearAntiClockwise 30s linear infinite, floatAndScale 18s ease-in-out infinite alternate 3s;
+}
+.mech-object.bearing {
+    width: 300px; height: 300px;
+    top: 50%; left: 30%;
+    transform: translate(-50%, -50%) rotateX(-15deg) rotateY(25deg); /* Center and tilt */
+    opacity: 0.35;
+    animation: rotateBearing 35s linear infinite, floatAndScale 22s ease-in-out infinite alternate 1s;
+}
+.mech-object.piston {
+    width: 100px; height: 300px; /* Vertical orientation */
+    top: 20%; right: 25%;
+    transform-origin: bottom center; /* For piston motion */
+    opacity: 0.3;
+    animation: pistonMove 4s ease-in-out infinite, floatAndScale 15s ease-in-out infinite alternate 2s;
+    filter: drop-shadow(0 0 6px rgba(40, 167, 69, 0.4)); /* Greenish glow */
+}
+.mech-object.car-silhouette {
+    width: 350px; height: 180px;
+    bottom: 0%; left: 0%; /* Start off-screen */
+    opacity: 0.2;
+    animation: slideCar 30s linear infinite; /* Slides across */
+    filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.5)); /* Yellow glow */
+}
+
+
+/* Keyframe Animations */
+
+@keyframes gridPan {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100px, -100px, 0); } /* Pan grid slowly */
+}
+
+@keyframes rotateGearClockwise {
+    from { transform: rotateX(20deg) rotateY(-30deg) rotateZ(0deg); }
+    to { transform: rotateX(20deg) rotateY(-30deg) rotateZ(360deg); }
+}
+
+@keyframes rotateGearAntiClockwise {
+    from { transform: rotateX(10deg) rotateY(20deg) rotateZ(0deg); }
+    to { transform: rotateX(10deg) rotateY(20deg) rotateZ(-360deg); }
+}
+
+@keyframes rotateBearing {
+    from { transform: translate(-50%, -50%) rotateX(-15deg) rotateY(25deg) rotateZ(0deg); }
+    to { transform: translate(-50%, -50%) rotateX(-15deg) rotateY(25deg) rotateZ(360deg); }
+}
+
+@keyframes floatAndScale {
+    0% { transform: translateY(0) scale(1); opacity: 0.4; }
+    50% { transform: translateY(-15px) scale(1.02); opacity: 0.45; }
+    100% { transform: translateY(0) scale(1); opacity: 0.4; }
+}
+
+@keyframes pistonMove {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(50px); } /* Simulates piston moving down */
+    100% { transform: translateY(0); }
+}
+
+@keyframes slideCar {
+    0% { transform: translateX(-100%); } /* Start completely off left */
+    100% { transform: translateX(120%); } /* End completely off right */
+}
+
+
+/* Hero Overlay - adjusted for new background */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Darker, more intense gradient to allow the glowing components to pop */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
+    z-index: 1; /* Above mechanical elements, below content */
+}
+
+/* Hero Content - Ensure it's on top */
+.hero-content {
+    position: relative;
+    z-index: 2; /* Ensures content is on top */
+}
+
+.hero-content h1,
+.hero-content .tagline {
+    color: white; /* Ensure text color is white for readability */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8); /* Stronger shadow for contrast */
+}
+
+/* Adjustments for existing hero-buttons - ensure they contrast */
+.btn-primary.btn-hero {
+    background-color: var(--accent-color); /* Yellow primary button */
+    color: var(--dark-bg); /* Dark text for contrast against yellow */
+    box-shadow: 0 6px 15px rgba(255, 193, 7, 0.5); /* Enhanced shadow */
+    font-weight: 700;
+}
+
+.btn-secondary.btn-hero {
+    border-color: white; /* White border for secondary button */
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Subtle white glow */
+}
+
+/* Media Queries for Hero Section */
+@media (max-width: 992px) {
+    .mech-object.gear-large { width: 300px; height: 300px; }
+    .mech-object.gear-small { width: 150px; height: 150px; }
+    .mech-object.bearing { width: 250px; height: 250px; }
+    .mech-object.piston { width: 80px; height: 250px; }
+    .mech-object.car-silhouette { width: 280px; height: 140px; }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 550px;
+        padding: 80px 15px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+    }
+
+    .hero-content .tagline {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn-hero {
+        padding: 12px 25px;
+        font-size: 1rem;
+        width: 80%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    /* Smaller sizes and reduced opacity for components on mobile */
+    .mech-object {
+        opacity: 0.25;
+        filter: drop-shadow(0 0 5px rgba(0, 123, 255, 0.3));
+    }
+    .mech-object.gear-large { width: 200px; height: 200px; }
+    .mech-object.gear-small { width: 100px; height: 100px; }
+    .mech-object.bearing { width: 180px; height: 180px; }
+    .mech-object.piston { width: 60px; height: 180px; }
+    .mech-object.car-silhouette { width: 200px; height: 100px; }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content .tagline {
+        font-size: 0.95rem;
+    }
+    .mech-object { display: none; } /* Hide complex animations on very small screens if performance is an issue */
+}
+
+
+/* style.css */
+
+/* About Section (existing styles you provided, adding subtle enhancements) */
+.about-section .container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.about-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.about-text {
+    flex: 2;
+    min-width: 300px;
+    max-width: 600px;
+    font-size: 1.1rem;
+    line-height: 1.7; /* Improved readability */
+    color: var(--text-dark); /* Ensure consistent text color */
+}
+
+.about-text ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 25px; /* Slightly more space */
+}
+
+.about-text ul li {
+    margin-bottom: 12px; /* Slightly more space */
+    display: flex;
+    align-items: flex-start; /* Align icon with text top */
+    gap: 10px;
+    color: var(--text-dark);
+}
+
+.about-text ul li .fas {
+    color: var(--primary-color); /* Use primary color for checkmarks */
+    font-size: 1.3rem; /* Slightly larger icon */
+    margin-top: 2px; /* Fine-tune alignment */
+}
+
+.about-stats {
+    flex: 1;
+    min-width: 250px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    background-color: var(--light-bg); /* Use a variable for light background */
+    padding: 30px;
+    border-radius: 12px; /* Slightly more rounded */
+    box-shadow: var(--shadow-medium); /* Stronger, more defined shadow */
+    border: 1px solid rgba(0, 123, 255, 0.1); /* Subtle border */
+    overflow: hidden; /* Ensure any internal effects are contained */
+    position: relative; /* For potential future pseudo-elements or background effects */
+}
+
+.stat-item {
+    text-align: center;
+    padding: 15px 10px; /* Add some internal padding */
+    border-radius: 8px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    background-color: rgba(0, 123, 255, 0.03); /* Very subtle hover effect */
+}
+
+.stat-item h3 {
+    font-size: 3rem; /* Larger font size for impact */
+    color: var(--primary-color); /* Main accent color */
+    margin-bottom: 8px; /* More space */
+    font-weight: 700; /* Bolder font */
+    line-height: 1; /* Tighter line height */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+}
+
+.stat-item p {
+    font-size: 1rem; /* Slightly larger description text */
+    color: var(--text-dark);
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+/* Media Queries for About Section (add/adjust as needed) */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-text {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .about-text ul {
+        text-align: left; /* Keep list items left-aligned */
+        padding-left: 20px;
+    }
+
+    .stat-item h3 {
+        font-size: 2.5rem; /* Adjust for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .about-stats {
+        grid-template-columns: 1fr; /* Stack stats vertically on very small screens */
+    }
+}
+
+/* Events Section */
+.event-categories {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.category-btn {
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    border: none;
+    padding: 10px 25px;
+    margin: 0 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.category-btn:hover {
+    background-color: var(--primary-color);
+}
+
+.category-btn.active {
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.event-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease, max-height 0.7s ease;
+}
+
+.event-list.active-category {
+    opacity: 1;
+    max-height: 1000px; /* Adjust based on max content height */
+    overflow: visible;
+}
+
+.event-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.event-card h3 {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: left;
+    color: var(--primary-color);
+}
+
+.event-card p {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dark);
+}
+
+.event-card .fas, .event-card .far {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
+
+.event-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--accent-color);
+    color: var(--text-dark);
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+/* Gallery Section */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-item .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    color: white;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .overlay {
+    transform: translateY(0);
+}
+
+/* Team Section */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.team-member {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.team-member img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid var(--primary-color);
+}
+
+.team-member h3 {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+.team-member .role {
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.team-member .description {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    opacity: 0.8;
+}
+
+/* Achievements Section */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.achievement-item {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.achievement-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.achievement-item .fas {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.achievement-item h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.achievement-item p {
+    font-size: 1rem;
+    color: var(--text-dark);
+    opacity: 0.8;
+}
+
+/* Contact Section */
+.contact-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+}
+
+.contact-info h3 {
+    text-align: left;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+    color: var(--text-dark);
+}
+
+.contact-info p .fas, .contact-info p .far {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+}
+
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: #0056b3;
+}
+
+.contact-form {
+    flex: 2;
+    min-width: 300px;
+    max-width: 600px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-form h3 {
+    text-align: left;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Ensure full width */
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+/* style.css */
+
+/* --- Footer --- */
+footer {
+    background-color: var(--dark-bg); /* Dark background from variables */
+    color: var(--text-light); /* Light text from variables */
+    padding: 80px 20px 30px; /* More top padding */
+    border-top: 6px solid var(--primary-color); /* Thicker, prominent top border */
+    position: relative;
+    overflow: hidden; /* Ensure nothing overflows from potential effects */
+}
+
+/* Optional: Subtle background texture/pattern for depth */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M100 0L0 100V0H100zM0 0l100 100V0H0z" fill="%23007bff" opacity="0.05"%3E%3C/path%3E%3C/svg%3E'); /* Very subtle diagonal lines */
+    background-size: 100px 100px;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Auto-adjusts to 3 columns now */
+    gap: 40px; /* Increased gap for better separation */
+    margin-bottom: 50px; /* More space before bottom section */
+    justify-items: start;
+    position: relative; /* For z-index in relation to ::before */
+    z-index: 1; /* Above the background pattern */
+}
+
+.footer-col {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-col h4 {
+    font-size: 1.3rem; /* Slightly larger heading */
+    color: var(--accent-color); /* Headings in accent color for contrast */
+    margin-bottom: 25px; /* More space below heading */
+    position: relative;
+    padding-bottom: 8px; /* For underline effect */
+}
+
+/* Underline effect for headings */
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px; /* Short underline */
+    height: 3px;
+    background-color: var(--primary-color); /* Primary color underline */
+    border-radius: 2px;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px; /* More space between list items */
+}
+
+.footer-col ul li a {
+    color: rgba(255, 255, 255, 0.8); /* Slightly less bright for softer look */
+    text-decoration: none;
+    font-size: 1rem; /* Slightly larger font size for links */
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: inline-block; /* Allows transform on links */
+}
+
+.footer-col ul li a:hover {
+    color: var(--primary-color); /* Primary color on hover */
+    transform: translateX(5px); /* Subtle slide animation on hover */
+}
+
+.footer-col .brand-info {
+    align-items: flex-start;
+}
+
+.footer-logo {
+    font-size: 2.2rem; /* Larger logo text */
+    margin-bottom: 20px;
+    color: var(--text-light); /* Ensure logo text color is light */
+    text-decoration: none; /* Remove underline for logo link */
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo .fas {
+    color: var(--accent-color); /* Icon in accent color */
+    font-size: 2.5rem; /* Larger icon */
+    transform: rotate(0deg); /* Initial state for animation */
+    transition: transform 0.5s ease;
+}
+
+.footer-logo:hover .fas {
+    transform: rotate(20deg); /* Subtle rotate on logo icon hover */
+}
+
+.footer-col p {
+    font-size: 0.95rem;
+    margin-bottom: 15px; /* Adjust spacing */
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.social-links {
+    display: flex;
+    gap: 18px; /* More space between icons */
+    margin-top: 15px;
+}
+
+.social-links a {
+    color: var(--text-light);
+    font-size: 1.8rem; /* Larger social icons */
+    transition: transform 0.3s ease, color 0.3s ease, filter 0.3s ease;
+    display: inline-flex; /* To properly center background for Instagram */
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* Define size for a subtle circle/square effect */
+    height: 40px;
+    border-radius: 50%; /* Make them circular */
+    background-color: rgba(255, 255, 255, 0.08); /* Subtle background for icons */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2); /* Subtle glow */
+}
+
+.social-links a:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 5px 20px rgba(0, 123, 255, 0.4); /* More pronounced glow on hover */
+}
+
+.social-links a:hover .fa-facebook-f { color: #3b5998; background-color: #e0e7ff; } /* Solid color for background on hover */
+.social-links a:hover .fa-instagram {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    -webkit-background-clip: unset; /* Remove text clip for background color */
+    -webkit-text-fill-color: white; /* Ensure icon is white on gradient */
+}
+.social-links a:hover .fa-linkedin-in { color: #0077B5; background-color: #cfe6f5; }
+
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 50px; /* More space from grid */
+    padding-top: 25px; /* More internal padding */
+    border-top: 1px solid rgba(255, 255, 255, 0.15); /* Slightly stronger border */
+}
+
+.footer-bottom p {
+    font-size: 0.9rem; /* Slightly larger font */
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 5px; /* Space out lines */
+}
+
+.footer-bottom .credits a {
+    color: var(--text-light); /* Make sure link color is visible */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: inline-block; /* Essential for transform and hover area */
+}
+
+.footer-bottom .credits a:hover {
+    color: var(--accent-color); /* Change color on hover */
+    transform: translateY(-2px); /* Subtle lift on hover */
+}
+
+/* Media Queries for Footer */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 30px;
+    }
+
+    .footer-col {
+        align-items: center; /* Center align columns on smaller screens */
+        text-align: center;
+    }
+
+    .footer-col h4 {
+        text-align: center;
+    }
+
+    .footer-col h4::after {
+        left: 50%;
+        transform: translateX(-50%); /* Center the underline */
+    }
+
+    .footer-col ul {
+        align-items: center;
+    }
+
+    .footer-col ul li a {
+        text-align: center;
+    }
+
+    .footer-col .brand-info {
+        align-items: center; /* Center brand info */
+    }
+
+    .footer-bottom p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* Stack all columns vertically on very small screens */
+    }
+
+    .footer-logo {
+        font-size: 2rem;
+    }
+
+    .footer-logo .fas {
+        font-size: 2.2rem;
+    }
+
+    .footer-col h4 {
+        font-size: 1.2rem;
+    }
+
+    .social-links {
+        justify-content: center; /* Center social links */
+    }
+}
+
+/* Back to Top Button */
+#backToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: var(--secondary-color);
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 20px;
+    box-shadow: var(--shadow-heavy);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#backToTopBtn:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 75px; /* Adjust based on navbar height */
+        left: 0;
+        background-color: rgba(33, 37, 41, 0.95); /* Darker, semi-transparent */
+        padding: 20px 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+        z-index: 999;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .nav-links.active {
+        display: flex;
+        max-height: 500px; /* Sufficient height for all links */
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .nav-button {
+        margin-top: 15px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+
+    .about-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-text, .about-stats {
+        max-width: 100%;
+    }
+
+    .about-stats {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        padding: 20px;
+    }
+
+    .event-list {
+        grid-template-columns: 1fr; /* Stack cards on smaller screens */
+    }
+
+    .team-grid, .achievements-grid, .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .contact-content {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        padding: 10px 20px;
+    }
+
+    .brand-logo {
+        font-size: 1.6rem;
+    }
+    .brand-logo .fas {
+        font-size: 2rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2.2rem;
+    }
+
+    .hero-section {
+        padding: 80px 15px;
+        min-height: 500px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+
+    .event-card, .team-member, .achievement-item, .contact-info, .contact-form {
+        padding: 20px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .footer-col {
+        text-align: center;
+    }
+
+    .footer-col h4 {
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    #backToTopBtn {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px;
+        font-size: 18px;
+    }
+}

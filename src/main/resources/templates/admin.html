@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="/assets/css/Features-Cards-icons.css">
+
+
+    <!-sweet alert->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-dark navbar-expand-md sticky-top py-3" id="mainNav">
+    <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-gear">
+                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"></path>
+                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"></path>
+                    </svg></span><span>MESA</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#eventAdderSec">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="#frfSec">FRF</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contactSec">Contacts Developer</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addAdmin">Add Admin</a></li>
+            </ul>
+            <form th:action="@{/logout}" method="post" class="d-inline">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button class="btn btn-primary shadow" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right-circle-fill">
+                        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"></path>
+                    </svg>&nbsp; &nbsp;Log Out
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<!-Add admin development purpose only->
+
+<div class="modal fade" id="addAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: black;" >Add Admin Account (Developer Use Only)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/addAdmin" method="post" accept-charset="utf-8">
+                <div class="modal-body">
+
+                    <div class="alert alert-warning" role="alert">
+                        <strong>Developer Note:</strong> This feature is for testing and development purposes only. Please use the default credentials provided by the developer. For any issues or inquiries, kindly use the designated contact form.
+                    </div>
+
+                    <div class="mb-3">
+                        <label style="color: black;" for="Name" class="form-label" >Name</label>
+                        <input type="text" class="form-control" name="adminUserName" id="Name" value="" placeholder="Enter name">
+                    </div>
+                    <div class="mb-3">
+
+                        <input type="hidden" class="form-control" name="adminId" id="Id" placeholder="Enter ID">
+                    </div>
+                    <div class="mb-3">
+                        <label style="color: black;" for="Email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="adminEmail" id="Email" value="" placeholder="Enter email">
+                    </div>
+                    <div class="mb-3">
+                        <label style="color: black;" for="Password" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="adminPassword" id="Password" value="" placeholder="Enter password">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add Account</button>
+                </div>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<section id="eventAdderSec">
+    <div>
+        <h1 style="color: var(--bs-green);font-size: 20px;text-align: center;">Add Events</h1><button class="btn btn-primary" type="button" style="color: var(--bs-btn-disabled-color);" data-bs-target="#eventsModal" data-bs-toggle="modal">ADD EVENT&nbsp;</button>
+    </div>
+
+
+    <div class="modal fade" role="dialog" tabindex="-1" id="eventsModal">
+        <div class="modal-dialog" role="document">
+            <form method="post" action="/admin/addEvent/" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" style="color: var(--bs-dark);font-weight: bold;text-align: left;">Events</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input class="form-control" type="hidden" id="eventID" name="eventID">
+
+                        <div id="imageUploadWarning" class="alert alert-warning" role="alert" style="display: none;">
+                            <strong>Important:</strong> When editing an event, re-uploading the QR image as well as date and time is **compulsory**.
+                        </div>
+
+                        <small class="form-text" style="color: var(--bs-gray-dark);font-style: italic;font-weight: bold;text-align: left;margin: 10px;">
+                            &nbsp; &nbsp;Name of Event
+                            <input name="eventName" id="eventName" class="form-control" type="text" placeholder="Event name">
+                        </small>
+                        <small class="form-text" style="color: var(--bs-gray-dark);font-style: italic;font-weight: bold;text-align: left;margin: 10px;">
+                            Date of Event
+                            <input name="DOE" id="DOE" class="form-control" type="date">
+                        </small>
+                        <small class="form-text" style="color: var(--bs-gray-dark);font-style: italic;font-weight: bold;text-align: left;margin: 10px;">
+                            Time of Event
+                            <input name="TOE" id="TOE" class="form-control" type="time" placeholder="HH:MM">
+                        </small>
+                        <small class="form-text" style="color: var(--bs-gray-dark);font-style: italic;font-weight: bold;text-align: left;margin: 10px;">
+                            Description of Event
+                            <input name="eventDesc" id="eventDesc" class="form-control" type="text" placeholder="Tell something about the event">
+                        </small>
+                        <small class="form-text" style="color: var(--bs-gray-dark);font-style: italic;font-weight: bold;text-align: left;margin: 10px;">Location of Event
+                            <input name="eventLoc" id="eventLoc" class="form-control" type="text" placeholder="Event location"></small>
+                        <small class="form-text" style="color: var(--bs-gray-dark);font-style: italic;font-weight: bold;text-align: left;margin: 10px;">Registration fee of Event
+                            <input name="eventFees" id="eventFees" class="form-control" type="number" placeholder="for ex: 30rs"></small>
+                        <small class="form-text" style="color: var(--bs-gray-dark);font-style: italic;font-weight: bold;text-align: left;margin: 10px;">QR to pay reg. fee
+                            <input class="form-control" type="file" name="file" id="file"></small>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="submit">Save</button>
+                    </div>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>DOE</th>
+                <th>TOE</th>
+                <th>LOC</th>
+                <th>Desc</th>
+                <th>Fee</th>
+                <th>Image</th>
+                <th>Action</th>
+                <th>Report</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="event:${eventList}">
+                <td th:text="${event.eventName}" ></td>
+                <td th:text="${#temporals.format(event.DOE, 'yyyy-MM-dd')}"></td> <td th:text="${event.TOE}"></td>
+                <td th:text="${event.eventLoc}"></td>
+                <td th:text="${event.eventDesc}"></td>
+                <td th:text="${event.eventFees}"></td>
+                <td><img th:src="@{'/eventImage/' + ${event.eventID}}" style="max-width: 50px; max-height: 50px;" alt="Event Image"/></td>
+                <td>
+                    <button th:onclick="editEvent([[${event}]])" class="btn btn-primary" type="button" style="width: 20px;height: 30px;background: rgb(255,230,101);" data-bs-target="#eventsModal" data-bs-toggle="modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-pencil-square text-start" style="text-align: left;margin: 0px 50px 60px 0px;color: black;">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                        </svg>
+                    </button>
+                    <button th:onclick="deleteEvent([[${event}]])" class="btn btn-primary" type="button" style="width: 20px;height: 30px;background: rgb(255,1,1);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-trash text-start" style="text-align: center;margin: 0px 50px 60px 0px;font-size: 17px;color: black;">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path>
+                        </svg>
+                    </button>
+                </td>
+                <td>
+                    <a th:href="@{/admin/reports/{eventId}(eventId=${event.eventID})}"
+                       class="btn btn-primary"
+                       style="width: 20px;height: 30px;background: var(--ref-gray);"
+                       title="View Registrations Report">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people text-start" style="text-align: left;margin: 0px 50px 60px 0px;font-size: 16px;color: rgb(0,0,0);">
+                            <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"></path>
+                        </svg>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<section id="frfSec">
+    <div>
+        <h1 style="color: var(--bs-green);font-size: 20px;text-align: center;">Feature Request Forms</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Student Email&nbsp;</th>
+                    <th>College&nbsp;&nbsp;</th>
+                    <th>Description&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="frfRecords : ${allFRF}">
+                    <td th:text="${frfRecords.userName}"></td>
+                    <td th:text="${frfRecords.userMail}">&nbsp;</td>
+                    <td th:text="${frfRecords.userCollege}" ></td>
+                    <td th:text="${frfRecords.featureRequestMessage}"></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<section class="py-5" id="contactSec">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <p class="fw-bold text-success mb-2">Contacts</p>
+                <h2 class="fw-bold">How you can reach Developer</h2>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6 col-xl-4">
+                <div>
+                    <form class="p-3 p-xl-4" method="post" action="https://api.web3forms.com/submit">
+                        <input type="hidden" name="access_key" value="f05b882e-ff8c-485d-b1fd-0699665c638a">
+
+                        <div class="mb-3"><input class="form-control" type="text" id="name-1" name="name" placeholder="Name" required></div>
+                        <div class="mb-3"><input class="form-control" type="email" id="email-1" name="email" placeholder="Email" required></div>
+                        <div class="mb-3"><textarea class="form-control" id="message-1" name="message" rows="6" placeholder="Message" required></textarea></div>
+                        <div><button class="btn btn-primary shadow d-block w-100" type="submit">Send </button></div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4 col-xl-4 d-flex justify-content-center justify-content-xl-start">
+                <div class="d-flex flex-wrap flex-md-column justify-content-md-start align-items-md-start h-100">
+                    <div class="d-flex align-items-center p-3">
+                        <div class="bs-icon-md bs-icon-circle bs-icon-primary shadow d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon bs-icon-md"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-telephone">
+                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"></path>
+                        </svg></div>
+                        <div class="px-2">
+                            <h6 class="fw-bold mb-0">Phone</h6>
+                            <p class="text-muted mb-0">9423589334</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center p-3">
+                        <div class="bs-icon-md bs-icon-circle bs-icon-primary shadow d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon bs-icon-md"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-envelope">
+                            <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"></path>
+                        </svg></div>
+                        <div class="px-2">
+                            <h6 class="fw-bold mb-0">Email</h6>
+                            <p class="text-muted mb-0">sandeshsudake818@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center p-3">
+                        <div class="bs-icon-md bs-icon-circle bs-icon-primary shadow d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon bs-icon-md"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-pin">
+                            <path d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354zm1.58 1.408-.002-.001.002.001zm-.002-.001.002.001A.5.5 0 0 1 6 2v5a.5.5 0 0 1-.276.447h-.002l-.012.007-.054.03a4.922 4.922 0 0 0-.827.58c-.318.278-.585.596-.725.936h7.792c-.14-.34-.407-.658-.725-.936a4.915 4.915 0 0 0-.881-.61l-.012-.006h-.002A.5.5 0 0 1 10 7V2a.5.5 0 0 1 .295-.458 1.775 1.775 0 0 0 .351-.271c.08-.08.155-.17.214-.271H5.14c.06.1.133.191.214.271a1.78 1.78 0 0 0 .37.282z"></path>
+                        </svg></div>
+                        <div class="px-2">
+                            <h6 class="fw-bold mb-0">Location</h6>
+                            <p class="text-muted mb-0">12 Example Street</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+
+<script>
+
+    // Make sure jQuery is loaded before this script, or use vanilla JS
+    // For this to work, you likely need a jQuery CDN or a local jQuery file
+    // which is not explicitly included in the provided HTML.
+    // Assuming you have it globally, or will add it.
+
+    function editEvent(event){
+        // Ensure property names match your Java Event entity's getters (e.g., getEventID())
+        $('#eventID').val(event.eventID);
+        $('#eventName').val(event.eventName);
+        $('#DOE').val(event.DOE); // Date of Event
+
+
+
+        $('#TOE').val(event.TOE); // Time of Event
+        $('#eventLoc').val(event.eventLoc);
+        $('#eventDesc').val(event.eventDesc);
+        $('#eventFees').val(event.eventFees);
+        $('#file').val(''); // Clear file input on edit, user can re-upload if needed
+
+        // --- NEW ADDITIONS FOR WARNING AND REQUIRED IMAGE ---
+
+        // Show the warning message
+        $('#imageUploadWarning').show();
+
+        // Make the file input required
+        $('#file').prop('required', true);
+
+        // When the modal is dismissed (closed), hide the warning and remove the required attribute
+        $('#eventsModal').on('hidden.bs.modal', function () {
+            $('#imageUploadWarning').hide();
+            $('#file').prop('required', false); // Remove required when modal closes
+        });
+    }
+
+   function deleteEvent(event) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33', // Red color for delete
+            cancelButtonColor: '#3085d6', // Blue/default color for cancel
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // User clicked "Yes, delete it!"
+                // This URL matches your Java controller's @GetMapping("/event/delete/{id}/")
+                // IMPORTANT: For DELETE operations, if you are making a GET request,
+                // you might need to disable CSRF for that specific URL or convert it to a POST request with CSRF.
+                // For simplicity now, if /event/delete/{id}/ is a GET, it bypasses CSRF.
+                // If it were a POST, you'd need a form for it like the logout button.
+                window.location.replace('/event/delete/' + event.eventID + '/');
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                // User clicked "No, cancel!" or dismissed the dialog
+                Swal.fire(
+                    'Cancelled',
+                    'Your record is safe :)',
+                    'error' // Or 'info'
+                );
+            }
+        });
+    }
+</script>
+
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/bold-and-dark.js"></script>
+</body>
+
+</html>
