@@ -21,35 +21,39 @@
             <li><a href="#hero">Home</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#events">Events</a></li>
+
+            <!--
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#team">Our Team</a></li>
+
+            -->
 
             <li><a  href="#" data-bs-toggle="modal" data-bs-target="#reqFeatureForm">FRF <sup style="color: red
                 ;">NEW</sup></a></li>
 
-            <li><a href="#achievements">Achievements</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="/admin/" class="nav-button">Member Login <i class="fas fa-sign-in-alt"></i></a></li>
-        </ul>
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-    </nav>
+            <!--  <li><a href="#achievements">Achievements</a></li> -->
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="/admin/" class="nav-button">Member Login <i class="fas fa-sign-in-alt"></i></a></li>
+      </ul>
+      <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+      </div>
+  </nav>
 </header>
 
 
 <!-Feature req form modal ->
 
 <div class="modal fade" id="reqFeatureForm" tabindex="-1" aria-labelledby="featureRequestModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="featureRequestModalLabel" style="color: black;">Feature Request Form</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <!-- Feature Request Form -->
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="featureRequestModalLabel" style="color: black;">Feature Request Form</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <!-- Feature Request Form -->
             <form action="/addFRF" method="post" accept-charset="utf-8">
                 <div class="modal-body">
 
