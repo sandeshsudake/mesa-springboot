@@ -1,26 +1,25 @@
- // JavaScript for Hamburger Menu Toggle
-    document.addEventListener('DOMContentLoaded', function() {
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
+document.addEventListener('DOMContentLoaded', function() {
+    // Navbar Toggler
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
 
-        if (hamburger && navLinks) {
-            hamburger.addEventListener('click', function() {
-                hamburger.classList.toggle('active');
-                navLinks.classList.toggle('active');
-            });
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('open'); // Optional: for hamburger animation
+        });
 
-            // Close menu when a link is clicked (for single-page navigation)
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', function() {
-                    // Only close if the menu is active
-                    if (navLinks.classList.contains('active')) {
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                    }
-                });
+        // Close nav when a link is clicked (for single-page navigation)
+        const allNavLinks = document.querySelectorAll('.nav-links a');
+        allNavLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('open');
+                }
             });
-        }
-    });
+        });
+    }
 
     // Event Category Filter
     const categoryButtons = document.querySelectorAll('.category-btn');
