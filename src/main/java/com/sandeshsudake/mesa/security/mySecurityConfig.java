@@ -26,7 +26,8 @@ public class mySecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         // Allow public access to the root URL and common static assets
                         .requestMatchers(
-                                AntPathRequestMatcher.antMatcher("/"),
+                                AntPathRequestMatcher.antMatcher("/"), // This now explicitly covers the root
+
                                 AntPathRequestMatcher.antMatcher("/index.html"),
                                 AntPathRequestMatcher.antMatcher("/favicon.ico"),
                                 AntPathRequestMatcher.antMatcher("/assets/**"),
@@ -52,8 +53,8 @@ public class mySecurityConfig {
                 )
                 // Configure logout
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/home/") // Redirect to /home/ after successful logout
-                        .permitAll() // Allow access to the logout endpoint itself
+                        .logoutSuccessUrl("/") // Redirect to the root path (which your homePage method handles)
+                        .permitAll()
                 );
 
         return http.build();

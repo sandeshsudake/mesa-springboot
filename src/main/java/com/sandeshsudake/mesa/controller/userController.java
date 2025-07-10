@@ -27,7 +27,7 @@ public class userController {
     @Autowired
     private userRepo userRepo;
 
-    @GetMapping("/home/")
+    @GetMapping("")
     public String homePage(Model model){
         List<event> eventList = eventRepo.findAll();
         model.addAttribute("eventList", eventList);
