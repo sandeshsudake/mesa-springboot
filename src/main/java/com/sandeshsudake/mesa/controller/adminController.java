@@ -43,6 +43,18 @@ public class adminController {
         List<frf> allFRF = frfRepo.findAll();
         model.addAttribute("allFRF",allFRF);
 
+        // --- START: Code for Analytics Section ---
+        long totalEvents = eventRepo.count();
+        long totalRegistrations = userRepo.count(); // Assuming userRepo counts all registered students/users
+        long totalFRF = frfRepo.count();
+        long totalAdmins = adminRepo.count();
+
+        model.addAttribute("totalEvents", totalEvents);
+        model.addAttribute("totalRegistrations", totalRegistrations);
+        model.addAttribute("totalFRF", totalFRF);
+        model.addAttribute("totalAdmins", totalAdmins);
+        // --- END: Code for Analytics Section ---
+
         return "admin"; // Thymeleaf template: admin.html
     }
 
@@ -115,5 +127,10 @@ public class adminController {
 
         return "redirect:/admin/";
     }
+
+
+
+
+
 
 }
