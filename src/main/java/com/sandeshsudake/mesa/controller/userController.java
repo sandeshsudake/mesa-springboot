@@ -1,9 +1,10 @@
 package com.sandeshsudake.mesa.controller;
 
-import com.sandeshsudake.mesa.entity.event; // Make sure 'event' entity is correctly imported
+import com.sandeshsudake.mesa.entity.event;
 import com.sandeshsudake.mesa.entity.user;
 import com.sandeshsudake.mesa.repository.eventRepo;
 import com.sandeshsudake.mesa.repository.userRepo;
+import com.sandeshsudake.mesa.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam; // Import @RequestParam for eventID
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional; // Import Optional
+import java.util.Optional;
+import java.time.format.DateTimeFormatter; // Import for date formatting
 
 @Controller
 public class userController {
@@ -27,6 +29,9 @@ public class userController {
     @Autowired
     private userRepo userRepo;
 
+    @Autowired
+    private EmailService emailService;
+
     @GetMapping("")
     public String homePage(Model model){
         List<event> eventList = eventRepo.findAll();
@@ -36,63 +41,94 @@ public class userController {
 
     @PostMapping("/registerEvents/")
     public String registerEvents(user newUserDetails, @RequestParam("eventID") String eventId) {
-        // 1. Try to find an existing user by email
         Optional<user> existingUserOptional = userRepo.findByUserMail(newUserDetails.getUserMail());
 
         user userToSave;
+        boolean isNewRegistration = true;
+        String registeredEventName = "Unknown Event";
+        String eventDate = "N/A"; // New variable for event date
+        String eventTime = "N/A"; // New variable for event time
+        String eventLocation = "N/A"; // New variable for event location
+
+
         if (existingUserOptional.isPresent()) {
-            // User exists, update their details and registered events
             userToSave = existingUserOptional.get();
-            // Update other details that might have changed (e.g., if user changed college name)
             userToSave.setUserName(newUserDetails.getUserName());
             userToSave.setUserCollege(newUserDetails.getUserCollege());
-            userToSave.setUTR(newUserDetails.getUTR()); // Update UTR for this specific registration
+            userToSave.setUTR(newUserDetails.getUTR());
 
         } else {
-            // New user, create a new user document
             userToSave = newUserDetails;
-            // Ensure the registeredEvent list is initialized (Lombok @Data might do this, but explicit is safer)
             if (userToSave.getRegisteredEvent() == null) {
                 userToSave.setRegisteredEvent(new ArrayList<>());
             }
         }
 
-        // 2. Fetch the event object based on the eventID from the form
         Optional<event> eventToRegisterOptional = eventRepo.findById(eventId);
 
         if (eventToRegisterOptional.isPresent()) {
             event eventToRegister = eventToRegisterOptional.get();
+            registeredEventName = eventToRegister.getEventName();
 
-            // 3. Add the event to the user's registeredEvent list if not already present
-            // This is a simple check; for production, you might want more robust duplicate checks
+            // --- START: Extract Event Details for Email ---
+            if (eventToRegister.getDOE() != null) {
+                eventDate = eventToRegister.getDOE().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            }
+            if (eventToRegister.getTOE() != null) {
+                eventTime = eventToRegister.getTOE(); // Assuming TOE is already a formatted String or can be directly used
+            }
+            if (eventToRegister.getEventLoc() != null) {
+                eventLocation = eventToRegister.getEventLoc();
+            }
+            // --- END: Extract Event Details for Email ---
+
             boolean alreadyRegistered = userToSave.getRegisteredEvent().stream()
                     .anyMatch(e -> e.getEventID().equals(eventToRegister.getEventID()));
 
             if (!alreadyRegistered) {
                 userToSave.getRegisteredEvent().add(eventToRegister);
+            } else {
+                isNewRegistration = false;
             }
-            // If already registered, you might show a different message or do nothing.
-            // For now, we'll proceed with saving the user anyway, updating other details.
         } else {
-            // Handle case where event is not found (e.g., log error, redirect to error page)
             System.err.println("Error: Event with ID " + eventId + " not found for registration.");
-            // You might want to return an error view or redirect to a different page here
-            return "registrationError"; // Create a registrationError.html page
+            return "registrationError";
         }
 
-        // 4. Save the updated or new user document
         userRepo.save(userToSave);
+
+        if (isNewRegistration) {
+            String toEmail = newUserDetails.getUserMail();
+            String subject = "MESA Event Registration Confirmation: " + registeredEventName;
+            String body = "Dear " + newUserDetails.getUserName() + ",\n\n"
+                    + "Thank you for registering for the MESA event: " + registeredEventName + ".\n\n"
+                    + "Event Details:\n"
+                    + "  Date: " + eventDate + "\n"
+                    + "  Time: " + eventTime + "\n"
+                    + "  Location: " + eventLocation + "\n\n"
+                    + "Your UTR/Reference ID for this registration is: " + newUserDetails.getUTR() + ".\n\n"
+                    + "We look forward to seeing you there!\n\n"
+                    + "Best regards,\n"
+                    + "The MESA Team";
+            try {
+                emailService.sendEmail(toEmail, subject, body);
+                System.out.println("Confirmation email sent to: " + toEmail + " for event: " + registeredEventName);
+            } catch (Exception e) {
+                System.err.println("Failed to send confirmation email to " + toEmail + ": " + e.getMessage());
+            }
+        } else {
+            System.out.println("User " + newUserDetails.getUserMail() + " already registered for " + registeredEventName + ". No new email sent.");
+        }
 
         return "registrationSuccess";
     }
 
-    // New endpoint to serve images
     @GetMapping("/eventImg/{id}")
     public ResponseEntity<byte[]> getEventImage(@PathVariable String id) {
-        return eventRepo.findById(id) // Retrieve event by ID
+        return eventRepo.findById(id)
                 .map(event -> ResponseEntity.ok()
-                        .contentType(MediaType.parseMediaType(event.getContentType())) // Set content type
-                        .body(event.getEventIMG())) // Return image bytes
-                .orElse(ResponseEntity.notFound().build()); // Return 404 if not found
+                        .contentType(MediaType.parseMediaType(event.getContentType()))
+                        .body(event.getEventIMG()))
+                .orElse(ResponseEntity.notFound().build());
     }
 }
